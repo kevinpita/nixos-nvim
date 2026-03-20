@@ -213,6 +213,14 @@ nixInfo.lze.load({
     end,
   },
   {
+    "render-markdown.nvim",
+    auto_enable = true,
+    ft = "markdown",
+    after = function()
+      require("render-markdown").setup({})
+    end,
+  },
+  {
     "gitsigns.nvim",
     auto_enable = true,
     event = "DeferredUIEnter",

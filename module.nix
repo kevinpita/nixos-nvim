@@ -38,6 +38,7 @@ inputs:
       nvim-tree-lua
       nvim-web-devicons
       diffview-nvim
+      render-markdown-nvim
     ];
   };
 
