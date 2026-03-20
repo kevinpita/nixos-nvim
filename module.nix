@@ -35,6 +35,9 @@ inputs:
       telescope-fzf-native-nvim
       plenary-nvim
       nvim-treesitter.withAllGrammars
+      nvim-tree-lua
+      nvim-web-devicons
+      diffview-nvim
     ];
   };
 

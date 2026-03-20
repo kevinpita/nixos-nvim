@@ -101,6 +101,11 @@ nixInfo.lze.load({
     colorscheme = "gruvbox",
   },
   {
+    "nvim-web-devicons",
+    auto_enable = true,
+    lazy = false,
+  },
+  {
     "nvim-treesitter",
     lazy = false,
     auto_enable = true,
@@ -159,6 +164,52 @@ nixInfo.lze.load({
       vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "Diagnostics" })
       vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "Resume" })
       vim.keymap.set("n", "<leader><leader>s", builtin.buffers, { desc = "Buffers" })
+    end,
+  },
+  {
+    "nvim-tree.lua",
+    auto_enable = true,
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
+    keys = {
+      { "<leader>ft", "<cmd>NvimTreeToggle<CR>", desc = "File tree" },
+      { "<leader>ff", "<cmd>NvimTreeFocus<CR>", desc = "Focus file tree" },
+    },
+    after = function()
+      require("nvim-tree").setup({
+        view = { width = 35 },
+        renderer = {
+          group_empty = true,
+          icons = { show = { git = true, folder = true, file = true, folder_arrow = true } },
+        },
+        filters = { dotfiles = false },
+        git = { enable = true, ignore = false },
+        update_focused_file = { enable = true },
+      })
+    end,
+  },
+  {
+    "diffview.nvim",
+    auto_enable = true,
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewFileHistory", "DiffviewToggleFiles" },
+    keys = {
+      { "<leader>do", "<cmd>DiffviewOpen<CR>", desc = "Diffview open" },
+      { "<leader>dc", "<cmd>DiffviewClose<CR>", desc = "Diffview close" },
+      { "<leader>dh", "<cmd>DiffviewFileHistory %<CR>", desc = "File history" },
+      { "<leader>dH", "<cmd>DiffviewFileHistory<CR>", desc = "Branch history" },
+    },
+    after = function()
+      require("diffview").setup({
+        use_icons = true,
+        enhanced_diff_hl = true,
+        view = {
+          default = { layout = "diff2_horizontal" },
+          merge_tool = { layout = "diff3_mixed" },
+        },
+        file_panel = {
+          listing_style = "tree",
+          win_config = { position = "left", width = 35 },
+        },
+      })
     end,
   },
   {
