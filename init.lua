@@ -221,6 +221,22 @@ nixInfo.lze.load({
     end,
   },
   {
+    "which-key.nvim",
+    auto_enable = true,
+    event = "DeferredUIEnter",
+    after = function()
+      require("which-key").setup()
+      require("which-key").add({
+        { "<leader>s", group = "Search" },
+        { "<leader>g", group = "Git" },
+        { "<leader>gt", group = "Git toggle" },
+        { "<leader>d", group = "Diffview" },
+        { "<leader>f", group = "File" },
+        { "<leader><leader>", group = "Buffer" },
+      })
+    end,
+  },
+  {
     "gitsigns.nvim",
     auto_enable = true,
     event = "DeferredUIEnter",

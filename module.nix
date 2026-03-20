@@ -39,6 +39,7 @@ inputs:
       nvim-web-devicons
       diffview-nvim
       render-markdown-nvim
+      which-key-nvim
     ];
   };
 
