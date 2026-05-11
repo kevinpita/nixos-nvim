@@ -55,6 +55,7 @@ inputs:
     tree-sitter
     ripgrep
     fd
+    wl-clipboard
   ];
 
   options.nvim-lib.pluginsFromPrefix = lib.mkOption {

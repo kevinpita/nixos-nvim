@@ -47,6 +47,7 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 vim.o.completeopt = "menu,preview,noselect"
 vim.o.termguicolors = true
+vim.opt.clipboard = "unnamedplus"
 
 -- Disable auto comment on enter
 vim.api.nvim_create_autocmd("FileType", {
