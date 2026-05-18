@@ -49,21 +49,14 @@
       );
       nixosModules = {
         default = self.nixosModules.neovim;
-        neovim = wrappers.lib.mkInstallModule {
+        neovim = wrappers.lib.getInstallModule {
           name = "neovim";
           value = module;
         };
       };
       homeModules = {
         default = self.homeModules.neovim;
-        neovim = wrappers.lib.mkInstallModule {
-          name = "neovim";
-          value = module;
-          loc = [
-            "home"
-            "packages"
-          ];
-        };
+        neovim = self.nixosModules.neovim;
       };
     };
 }

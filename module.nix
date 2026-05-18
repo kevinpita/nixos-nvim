@@ -16,6 +16,12 @@ inputs:
   };
 
   config.settings.config_directory = ./.;
+  config.settings.dont_link = true;
+  config.hosts.python3.nvim-host.dontWrap = true;
+  config.hosts.python3.nvim-host.package = "${config.hosts.python3.package}";
+  config.hosts.node.nvim-host.dontWrap = true;
+  config.hosts.node.nvim-host.package = "${config.hosts.node.package}";
+  config.hosts.ruby.nvim-host.enable = false;
 
   config.specs.lze.data = with config.nvim-lib.neovimPlugins; [
     lze
@@ -34,7 +40,15 @@ inputs:
       telescope-nvim
       telescope-fzf-native-nvim
       plenary-nvim
-      nvim-treesitter.withAllGrammars
+      (nvim-treesitter.withPlugins (
+        grammars:
+        builtins.attrValues (
+          builtins.removeAttrs grammars [
+            "supercollider"
+            "tree-sitter-supercollider"
+          ]
+        )
+      ))
       nvim-tree-lua
       nvim-web-devicons
       diffview-nvim
