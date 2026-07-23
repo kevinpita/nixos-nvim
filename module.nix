@@ -65,7 +65,7 @@ inputs:
     ];
   };
 
-  config.extraPackages = with pkgs; [
+  config.runtimePkgs = with pkgs; [
     tree-sitter
     ripgrep
     fd
