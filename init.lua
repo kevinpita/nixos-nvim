@@ -2,6 +2,7 @@ vim.loader.enable()
 
 -- Set up nixInfo global
 _G.nixInfo = require(vim.g.nix_info_plugin_name)
+vim.env.MYVIMRC = nixInfo(nil, "settings", "config_directory") .. "/init.lua"
 nixInfo.lze = setmetatable(require("lze"), getmetatable(require("lzextras")))
 function nixInfo.get_nix_plugin_path(name)
   return nixInfo(nil, "plugins", "lazy", name) or nixInfo(nil, "plugins", "start", name)
@@ -47,6 +48,10 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 vim.o.completeopt = "menu,preview,noselect"
 vim.o.termguicolors = true
+
+if vim.env.HERDR_ENV == "1" and not vim.env.WAYLAND_DISPLAY and not vim.env.DISPLAY then
+  vim.g.clipboard = "osc52"
+end
 vim.opt.clipboard = "unnamedplus"
 
 -- Disable auto comment on enter

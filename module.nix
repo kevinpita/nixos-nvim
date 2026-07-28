@@ -18,7 +18,7 @@ inputs:
   config.settings.config_directory = ./.;
   config.settings.dont_link = true;
   config.hosts.python3.nvim-host.dontWrap = true;
-  config.hosts.python3.nvim-host.package = "${config.hosts.python3.package}";
+  config.hosts.python3.nvim-host.package = "${config.hosts.python3.package}/bin/python3";
   config.hosts.node.nvim-host.dontWrap = true;
   config.hosts.node.nvim-host.package = "${config.hosts.node.package}";
   config.hosts.ruby.nvim-host.enable = false;
@@ -43,8 +43,12 @@ inputs:
       (nvim-treesitter.withPlugins (
         grammars:
         builtins.attrValues (
-          builtins.removeAttrs grammars [
+          removeAttrs grammars [
             "supercollider"
+            "tree-sitter-go-template"
+            "tree-sitter-go-template-helm"
+            "tree-sitter-org-nvim"
+            "tree-sitter-sshclientconfig"
             "tree-sitter-supercollider"
           ]
         )
@@ -70,6 +74,7 @@ inputs:
     ripgrep
     fd
     wl-clipboard
+    xdg-utils
   ];
 
   options.nvim-lib.pluginsFromPrefix = lib.mkOption {
