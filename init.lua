@@ -50,7 +50,24 @@ vim.o.completeopt = "menu,preview,noselect"
 vim.o.termguicolors = true
 
 if vim.env.HERDR_ENV == "1" and not vim.env.WAYLAND_DISPLAY and not vim.env.DISPLAY then
-  vim.g.clipboard = "osc52"
+  local osc52 = require("vim.ui.clipboard.osc52")
+  local function paste_from_unnamed_register()
+    return { vim.fn.getreg('"', 1, true), vim.fn.getregtype('"') }
+  end
+
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = osc52.copy("+"),
+      ["*"] = osc52.copy("*"),
+    },
+    -- Most terminals block OSC 52 reads. Use Neovim's last register for `p`
+    -- and the terminal paste shortcut for content copied outside Neovim.
+    paste = {
+      ["+"] = paste_from_unnamed_register,
+      ["*"] = paste_from_unnamed_register,
+    },
+  }
 end
 vim.opt.clipboard = "unnamedplus"
 
